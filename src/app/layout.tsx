@@ -1,29 +1,27 @@
+"use client";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import CustomThemeProvider from "./components/ThemeProvider";
+import { ActivePageProvider } from "./context/ActivePageContext";
+import "./globals.css";
+import { Providers } from "./providers";
 
-
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import CustomThemeProvider from './components/ThemeProvider';
-import { Container } from '@mui/material';
-import './globals.css';
-import { Providers } from './providers';
-
-export const metadata = {
-  title: 'Niraj Dhakal',
-  description: 'Portfolio website of Niraj Dhakal',
-};
-
-export default function RootLayout({ children }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
-      <body>
+      <body className="min-h-screen flex flex-col bg-black text-white">
         <Providers>
-        <CustomThemeProvider>
-          <Navbar />
-          <Container component="main" sx={{ minHeight: '80vh', py: 3 }}>
-            {children}
-          </Container>
-          <Footer />
-        </CustomThemeProvider>
+          <ActivePageProvider>
+            <Navbar />
+            <main className="flex-grow py-6 container mx-auto px-4">
+              {children}
+            </main>
+            <Footer />
+          </ActivePageProvider>
         </Providers>
       </body>
     </html>

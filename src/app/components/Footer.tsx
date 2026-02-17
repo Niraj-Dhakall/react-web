@@ -1,13 +1,8 @@
-import Typography from '@mui/material/Typography';
-import { Box } from '@mui/material';
-
 const Footer = () => {
   return (
-    <Box component="footer" sx={{ bgcolor: 'primary.main', py: 3 }}>
-      <Typography variant="body2" color="white" align="center">
-        © 2024 Niraj Dhakal.
-      </Typography>
-    </Box>
+    <footer className="bg-black border-t border-neutral-800 py-6 text-center text-gray-400">
+      <p>&copy; Niraj Dhakal 2026.</p>
+    </footer>
   );
 };
 
