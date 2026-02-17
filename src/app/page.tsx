@@ -117,7 +117,7 @@ export default function Home() {
           </p>
           <div>
             <a
-              href="/images/NirajDhakalResume.pdf"
+              href="/images/NirajDhakalResumeLatest.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block border border-white px-8 py-3 text-white font-semibold tracking-wider hover:bg-white hover:text-black transition-colors"
