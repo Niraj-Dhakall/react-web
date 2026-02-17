@@ -25,6 +25,22 @@ export default function Home() {
               links={[]}
             />
             <ExperienceCard
+              title="LocalStream"
+              date="January 2026"
+              items={[
+                "Built peer-to-peer screen sharing application using WebRTC for media streaming and Go WebSocket server for signaling, supporting 5+ concurrent cross-device viewers over local network.",
+                "Implemented thread-safe room management with sync.RWMutex to handle concurrent connections and prevent race conditions in shared state.",
+                "Scaled architecture from 1-to-1 to 1-to-many connections while maintaining direct WebRTC P2P media paths with server handling only signaling.",
+                "Tech Stack: Go, Next.js, WebRTC, WebSockets, Docker, HTTPS.",
+              ]}
+              links={[
+                {
+                  platform: "GitHub",
+                  link: "https://github.com/Niraj-Dhakall/local-stream",
+                },
+              ]}
+            />
+            <ExperienceCard
               title="Scrum Master/Developer @ Retriever Proposal Portal"
               date="Fall 2025"
               items={[
@@ -86,30 +102,33 @@ export default function Home() {
   return (
     <main className="text-white">
       {/* Hero Section */}
-      <section className="flex flex-col md:flex-row items-center min-h-[80vh] gap-10 py-12">
+      <section className="flex flex-col md:flex-row items-center min-h-[80vh] gap-5 py-12">
         <div className="flex-1 space-y-6">
           <h3
-            className="text-3xl text-[#3498db] font-bold"
+            className="text-3xl text-[#3498db] sm:text-xl md:text-5xl font-bold"
             style={{ fontFamily: "Jersey 10" }}
           >
             Hello I'm
           </h3>
-          <h1 className="text-3xl md:text-6xl font-bold">
-            <Typewriter
-              words={[
-                "Niraj Dhakal",
-                "A Software Engineer",
-                "Looking for New Grad Roles",
-              ]}
-              loop={true}
-              cursor
-              cursorStyle="_"
-              typeSpeed={70}
-              deleteSpeed={100}
-              delaySpeed={1000}
-            />
-          </h1>
-          <p className="text-gray-300 text-lg leading-relaxed max-w-xl">
+          <div className="h-[3rem] md:h-[4rem]">
+            <h1 className="text-3xl md:text-5xl font-bold">
+              <Typewriter
+                words={[
+                  "Niraj Dhakal",
+                  "A Software Engineer",
+                  "Looking for New Grad Roles",
+                ]}
+                loop={true}
+                cursor
+                cursorStyle="."
+                typeSpeed={70}
+                deleteSpeed={100}
+                delaySpeed={1000}
+                cursorColor="red"
+              />
+            </h1>
+          </div>
+          <p className="text-gray-300 text-lg  md:text-xl leading-relaxed max-w-xl">
             Software engineer with production experience building AI-powered
             systems and full-stack applications. Skilled in Go, React,
             PostgreSQL, and RAG architecture. Experienced in end-to-end feature
@@ -126,11 +145,11 @@ export default function Home() {
             </a>
           </div>
         </div>
-        <div className="flex justify-center">
+        <div className="flex flex-1 justify-center">
           <img
             src="/images/IMG_0195.jpg"
             alt="Niraj Dhakal"
-            className="w-80 h-80 md:w-96 md:h-96 object-cover rounded-lg"
+            className="w-80 h-80 md:w-90 md:h-90 sm:w-50 sm:h-50 object-cover rounded-lg"
           />
         </div>
       </section>
@@ -140,13 +159,13 @@ export default function Home() {
         <h2 className="text-3xl font-bold mb-8">Skills</h2>
         <div className="flex gap-6 overflow-x-auto pb-4 justify-center flex-wrap">
           {[
-            { icon: "py", name: "Python" },
-            { icon: "cpp", name: "C++" },
-            { icon: "html,css", name: "HTML/CSS" },
-            { icon: "ts", name: "TypeScript" },
             { icon: "go", name: "Go" },
+            { icon: "ts", name: "TypeScript" },
+            { icon: "py", name: "Python" },
             { icon: "postgres", name: "PostgreSQL" },
+            { icon: "cpp", name: "C++" },
             { icon: "swift", name: "Swift" },
+            { icon: "html,css", name: "HTML/CSS" },
           ].map((skill) => (
             <div
               key={skill.name}
