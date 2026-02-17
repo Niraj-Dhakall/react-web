@@ -3,7 +3,7 @@ import { Typewriter } from "react-simple-typewriter";
 import { useActivePage } from "./context/ActivePageContext";
 
 export default function Home() {
-  const { activePage } = useActivePage();
+  const { activePage, setActivePage } = useActivePage();
 
   if (activePage === "Experience") {
     return (
@@ -134,7 +134,7 @@ export default function Home() {
             PostgreSQL, and RAG architecture. Experienced in end-to-end feature
             ownership from design through deployment.
           </p>
-          <div>
+          <div className="flex gap-2">
             <a
               href="/images/NirajDhakalResumeLatest.pdf"
               target="_blank"
@@ -143,6 +143,14 @@ export default function Home() {
             >
               Resume
             </a>
+            <div>
+              <button
+                className="border bg-white border-white md:hidden lg:hidden px-8 py-3 text-black font-semibold tracking-wider hover:bg-gray-300 hover:text-black transition-colors"
+                onClick={() => setActivePage("Experience")}
+              >
+                Experience
+              </button>
+            </div>
           </div>
         </div>
         <div className="flex flex-1 justify-center">
