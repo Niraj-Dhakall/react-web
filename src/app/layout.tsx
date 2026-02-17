@@ -1,7 +1,6 @@
 "use client";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import CustomThemeProvider from "./components/ThemeProvider";
 import { ActivePageProvider } from "./context/ActivePageContext";
 import "./globals.css";
 import { Providers } from "./providers";
