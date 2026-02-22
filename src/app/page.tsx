@@ -17,7 +17,7 @@ export default function Home() {
               items={[
                 "Built an AI-powered marketing platform for game developers featuring competitor analysis, content generation, and multi-platform social media scheduling.",
                 "Developed full-stack application with React/TypeScript frontend, Go/Gin backend, and PostgreSQL database with sqlc for queries, containerized using Docker.",
-                "Integrated a RAG system leveraging game documentation and competitor data to deliver context-aware content recommendations with 1–2 second query latency.",
+                "Integrated a RAG system leveraging game documentation and competitor data to deliver context-aware content recommendations.",
                 "Designed and implemented persistent chat history with group-based authorization, storing sessions in PostgreSQL and injecting last 3 conversation turns into LLM context.",
                 "Refactored authentication from localStorage to HTTP-only JWT cookies with secure group+user ID validation to prevent XSS.",
                 "Implemented task queue using Celery for social media automation and Instagram scraping with Selenium.",
