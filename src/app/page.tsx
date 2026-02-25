@@ -168,7 +168,7 @@ export default function Home() {
         <div className="flex gap-6 overflow-x-auto pb-4 justify-center flex-wrap">
           {[
             {
-              icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-wordmark.svg",
+              icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original-wordmark.svg",
               name: "Go",
             },
             {
