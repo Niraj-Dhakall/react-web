@@ -167,13 +167,26 @@ export default function Home() {
         <h2 className="text-3xl font-bold mb-8">Skills</h2>
         <div className="flex gap-6 overflow-x-auto pb-4 justify-center flex-wrap">
           {[
-            { icon: "go", name: "Go" },
-            { icon: "ts", name: "TypeScript" },
-            { icon: "py", name: "Python" },
-            { icon: "postgres", name: "PostgreSQL" },
-            { icon: "cpp", name: "C++" },
-            { icon: "swift", name: "Swift" },
-            { icon: "html,css", name: "HTML/CSS" },
+            {
+              icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original.svg",
+              name: "Go",
+            },
+            {
+              icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
+              name: "TypeScript",
+            },
+            {
+              icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
+              name: "Python",
+            },
+            {
+              icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original-wordmark.svg",
+              name: "PostgreSQL",
+            },
+            {
+              icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg",
+              name: "C++",
+            },
           ].map((skill) => (
             <div
               key={skill.name}
@@ -181,7 +194,7 @@ export default function Home() {
             >
               <img
                 className="w-16 h-16 md:w-20 md:h-20 object-contain"
-                src={`https://skillicons.dev/icons?i=${skill.icon}`}
+                src={`${skill.icon}`}
                 alt={skill.name}
               />
               <h4 className="mt-2 text-sm font-semibold">{skill.name}</h4>
@@ -190,16 +203,20 @@ export default function Home() {
         </div>
         <div className="mt-6">
           <div className="flex gap-4 justify-center flex-wrap">
-            {["react", "next", "firebase", "tailwind", "materialui"].map(
-              (icon) => (
-                <img
-                  key={icon}
-                  className="w-16 h-16 md:w-20 md:h-20 object-contain"
-                  src={`https://skillicons.dev/icons?i=${icon}`}
-                  alt={icon}
-                />
-              ),
-            )}
+            {[
+              "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original-wordmark.svg",
+              "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
+              "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg",
+              "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
+              "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/materialui/materialui-original.svg",
+            ].map((icon) => (
+              <img
+                key={icon}
+                className="w-16 h-16 md:w-20 md:h-20 object-contain"
+                src={`${icon}`}
+                alt={icon}
+              />
+            ))}
           </div>
           <h4 className="mt-2 text-sm font-semibold">React Stack</h4>
         </div>
