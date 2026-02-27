@@ -120,11 +120,11 @@ export default function Home() {
                 ]}
                 loop={true}
                 cursor
-                cursorStyle="."
+                cursorStyle="|"
                 typeSpeed={70}
                 deleteSpeed={100}
                 delaySpeed={1000}
-                cursorColor="red"
+                cursorColor="white"
               />
             </h1>
           </div>
