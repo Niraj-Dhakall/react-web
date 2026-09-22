@@ -3,7 +3,13 @@ import { MediaGallery } from "@/components/MediaGallery";
 import { Reveal } from "@/components/Reveal";
 import { RotatingText } from "@/components/RotatingText";
 import { SiteNav } from "@/components/SiteNav";
-import { ArrowUpRight, FileText, GitHub, Mail } from "@/components/icons";
+import {
+  ArrowUpRight,
+  FileText,
+  GitHub,
+  LinkedIn,
+  Mail,
+} from "@/components/icons";
 import {
   education,
   experience,
@@ -141,6 +147,7 @@ export default function Home() {
               {profile.socials.map((s) => (
                 <GhostLink key={s.href} href={s.href}>
                   {s.label === "GitHub" && <GitHub />}
+                  {s.label === "LinkedIn" && <LinkedIn />}
                   {s.label}
                 </GhostLink>
               ))}
@@ -225,6 +232,10 @@ function Hero() {
             <GhostLink href={profile.socials[0]?.href ?? "#"}>
               <GitHub />
               GitHub
+            </GhostLink>
+            <GhostLink href={profile.socials[1]?.href ?? "#"}>
+              <LinkedIn />
+              LinkedIn
             </GhostLink>
             <GhostLink href={`mailto:${profile.email}`}>
               <Mail />
