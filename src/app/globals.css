@@ -1,3 +1,261 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/*  Design tokens — "sonar" system                                     */
+/*  Deep blue-black base, one warm amber accent, mono utility voice.   */
+/* ------------------------------------------------------------------ */
+
+@theme inline {
+  --font-display: var(--font-bricolage);
+  --font-sans: var(--font-instrument);
+  --font-mono: var(--font-spline-mono);
+}
+
+@theme {
+  /* color */
+  --color-ink: #0b0f14; /* page background */
+  --color-raised: #10161e; /* cards / raised surfaces */
+  --color-well: #0d1218; /* inset surfaces (caption bars) */
+  --color-line: #1e2733; /* default hairline */
+  --color-line-bright: #2e3a4a; /* hover hairline */
+  --color-fg: #e7ecf3; /* primary text */
+  --color-mut: #8b95a7; /* secondary text */
+  --color-faint: #5c6675; /* tertiary text */
+  --color-accent: #f5a524; /* sonar amber */
+  --color-accent-soft: #ffc964;
+  --color-ok: #4ade80; /* availability signal only */
+
+  /* motion — strong curves; built-in CSS easings are too weak */
+  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Base                                                               */
+/* ------------------------------------------------------------------ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-accent) 30%, transparent);
+  color: var(--color-fg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* thin, quiet scrollbars on the media strips */
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Components                                                         */
+/* ------------------------------------------------------------------ */
+
+@layer components {
+  /* Pressable elements: instant feedback that the interface heard you */
+  .btn {
+    cursor: pointer;
+    transition:
+      transform 160ms var(--ease-out-strong),
+      background-color 200ms ease,
+      border-color 200ms ease,
+      color 200ms ease;
+  }
+  .btn:active {
+    transform: scale(0.97);
+  }
+
+  /* Instrument frame: the signature. TL + BR amber corner ticks on
+     anything that presents visual evidence (photo, screenshots, video). */
+  .ticks {
+    position: relative;
+  }
+  .ticks::before,
+  .ticks::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    pointer-events: none;
+    z-index: 2;
+    border-color: var(--color-accent);
+    transition:
+      width 200ms var(--ease-out-strong),
+      height 200ms var(--ease-out-strong);
+  }
+  .ticks::before {
+    top: -1px;
+    left: -1px;
+    border-top: 1.5px solid var(--color-accent);
+    border-left: 1.5px solid var(--color-accent);
+  }
+  .ticks::after {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 1.5px solid var(--color-accent);
+    border-right: 1.5px solid var(--color-accent);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .ticks-grow:hover .ticks::before,
+    .ticks-grow:hover .ticks::after,
+    .ticks:hover::before,
+    .ticks:hover::after {
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  /* Underline sweep for inline links (background, so no layout shift) */
+  .link-sweep {
+    background-image: linear-gradient(var(--color-accent), var(--color-accent));
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0% 1px;
+    transition: background-size 250ms var(--ease-out-strong);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .link-sweep:hover {
+      background-size: 100% 1px;
+    }
+  }
+
+  /* Scroll reveal — fires once, marketing surface only */
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 600ms var(--ease-out-strong),
+      transform 600ms var(--ease-out-strong);
+  }
+  .reveal[data-visible="true"] {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Hero load-in stagger (plays once per visit — the delight budget) */
+  .intro {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: intro-rise 700ms var(--ease-out-strong) both;
+    animation-delay: calc(var(--i, 0) * 80ms);
+  }
+  @keyframes intro-rise {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Availability signal */
+  .pulse-dot {
+    position: relative;
+  }
+  .pulse-dot::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background: var(--color-ok);
+    animation: pulse-ring 2.4s var(--ease-out-strong) infinite;
+  }
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(1);
+      opacity: 0.6;
+    }
+    70%,
+    100% {
+      transform: scale(2.4);
+      opacity: 0;
+    }
+  }
+
+  /* Rotating role text — blur masks the crossfade seam */
+  .rotor {
+    display: inline-block;
+    transition:
+      opacity 220ms var(--ease-out-strong),
+      transform 220ms var(--ease-out-strong),
+      filter 220ms var(--ease-out-strong);
+  }
+  .rotor[data-phase="out"] {
+    opacity: 0;
+    transform: translateY(-6px);
+    filter: blur(2px);
+  }
+
+  /* Lightbox (modal — origin stays centered by design) */
+  .lightbox[open] {
+    animation: lightbox-in 220ms var(--ease-out-strong);
+  }
+  .lightbox::backdrop {
+    background: color-mix(in srgb, var(--color-ink) 82%, transparent);
+    backdrop-filter: blur(8px);
+    animation: backdrop-in 220ms ease;
+  }
+  @keyframes lightbox-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+  }
+  @keyframes backdrop-in {
+    from {
+      opacity: 0;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Reduced motion: fewer + gentler, not zero                          */
+/* ------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    transform: none;
+    transition: opacity 200ms ease;
+  }
+  .intro {
+    transform: none;
+    animation-duration: 200ms;
+    animation-delay: 0ms;
+  }
+  .rotor,
+  .rotor[data-phase="out"] {
+    transition: opacity 150ms ease;
+    transform: none;
+    filter: none;
+  }
+  .pulse-dot::after {
+    animation: none;
+    opacity: 0;
+  }
+  .lightbox[open] {
+    animation: backdrop-in 150ms ease;
+  }
+  .ticks::before,
+  .ticks::after {
+    transition: none;
+  }
+}

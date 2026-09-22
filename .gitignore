@@ -34,3 +34,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# macOS Finder metadata (not caught by the existing .DS_Store rule for repo root)
+**/.DS_Store
