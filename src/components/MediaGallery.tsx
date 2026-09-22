@@ -156,7 +156,9 @@ function Slide({
           src={item.src}
           alt={item.alt}
           loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover"
+          className={`absolute inset-0 h-full w-full ${
+            item.fit === "contain" ? "object-contain p-6" : "object-cover"
+          }`}
         />
       ) : (
         <>
@@ -168,7 +170,9 @@ function Slide({
             loop
             playsInline
             preload="metadata"
-            className="absolute inset-0 h-full w-full object-cover"
+            className={`absolute inset-0 h-full w-full ${
+              item.fit === "contain" ? "object-contain p-6" : "object-cover"
+            }`}
           />
           <span className="absolute bottom-2 right-2 flex items-center gap-1.5 border border-line-bright bg-ink/80 px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-fg backdrop-blur-sm">
             <Play width={10} height={10} className="text-accent" /> video

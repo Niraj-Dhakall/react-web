@@ -21,6 +21,12 @@ export type MediaItem = {
   alt: string;
   /** Optional poster frame for videos (strongly recommended) */
   poster?: string;
+  /**
+   * How the image/video fills its frame. Default "cover" (edge-to-edge,
+   * cropped) — use "contain" for a small or oddly-cropped source (e.g. a
+   * terminal snippet) that would otherwise be stretched and look blurry.
+   */
+  fit?: "cover" | "contain";
 };
 
 export type LinkItem = {
@@ -156,6 +162,43 @@ export const experience: Entry[] = [
 /* ------------------------------------------------------------------ */
 
 export const projects: Entry[] = [
+  {
+    slug: "rag",
+    title: "RAG Pipeline",
+    date: "Jun 2026",
+    summary:
+      "A local Retrieval-Augmented Generation system with real embeddings, pgvector storage, and a hand-built eval set to measure retrieval accuracy instead of eyeballing it.",
+    items: [
+      "Embedded ~75 Wikipedia article abstracts with OpenAI's text-embedding-3-small (Gemini embedding-001 as a swappable alternative) and stored the vectors in PostgreSQL with pgvector.",
+      "Exposed retrieval over a Go HTTP endpoint (net/http + pgx), with Postgres, pgvector, and the API orchestrated via docker-compose for a one-command local setup.",
+      "Built a 46-pair hand-written query/expected-document evaluation set to score retrieval accuracy instead of relying on spot checks.",
+    ],
+    links: [{ label: "GitHub", href: "https://github.com/Niraj-Dhakall/RAG" }],
+    media: [
+      {
+        type: "image",
+        src: "/media/rag/eval-output.png",
+        alt: "eval run — 93.5% recall@1 across 46 queries",
+        fit: "contain",
+      },
+      {
+        type: "image",
+        src: "/media/rag/search-api-1.png",
+        alt: "search endpoint — query → ranked passages",
+      },
+      {
+        type: "image",
+        src: "/media/rag/search-api-2.png",
+        alt: "search endpoint — a second query against the same index",
+      },
+      {
+        type: "image",
+        src: "/media/rag/database.png",
+        alt: "pgvector table — Wikipedia abstracts and their embeddings",
+      },
+    ],
+    tags: ["Go", "PostgreSQL", "pgvector", "RAG", "Docker"],
+  },
   {
     slug: "localstream",
     title: "LocalStream",
@@ -298,7 +341,7 @@ export const education = {
   school: "University of Maryland, Baltimore County",
   degree: "B.S. in Computer Science",
   date: "May 2026",
-  gpa: "3.665 — Cum Laude",
+  gpa: "3.667 — Cum Laude",
   coursework:
     "Data Structures, Operating Systems, Artificial Intelligence, Machine Learning, Malware Analysis, C++ and Python Programming",
 };

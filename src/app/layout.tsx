@@ -31,11 +31,11 @@ const splineMono = Spline_Sans_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://nirajd.dev"),
-  title: "Niraj Dhakal — Software Engineer",
+  title: "Niraj Dhakal | Software Engineer",
   description:
     "Software engineer with production experience building AI-powered systems and full-stack applications. Go, React, PostgreSQL, and RAG architecture — open to new-grad roles.",
   openGraph: {
-    title: "Niraj Dhakal — Software Engineer",
+    title: "Niraj Dhakal | Software Engineer",
     description:
       "Production experience building AI-powered systems and full-stack applications. Go · React · PostgreSQL · RAG.",
     url: "https://nirajd.dev",
@@ -44,17 +44,13 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Niraj Dhakal — Software Engineer",
+    title: "Niraj Dhakal | Software Engineer",
     description:
       "Production experience building AI-powered systems and full-stack applications.",
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
