@@ -63,7 +63,7 @@ export const profile = {
   socials: [
     { label: "GitHub", href: "https://github.com/Niraj-Dhakall" },
     // TODO: add your LinkedIn URL
-    // { label: "LinkedIn", href: "https://www.linkedin.com/in/..." },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/nirajdhakal26/" },
   ] satisfies LinkItem[],
 };
 
@@ -78,13 +78,20 @@ export const experience: Entry[] = [
     org: "Dogwood Gaming",
     date: "Jan 2025 — Present",
     items: [
-      "Built an AI-powered marketing platform for game developers featuring competitor analysis, content generation, and multi-platform social media scheduling.",
-      "Developed full-stack application with React/TypeScript frontend, Go/Gin backend, and PostgreSQL database with sqlc for queries, containerized using Docker.",
-      "Integrated a RAG system leveraging game documentation and competitor data to deliver context-aware content recommendations.",
-      "Designed and implemented persistent chat history with group-based authorization, storing sessions in PostgreSQL and injecting last 3 conversation turns into LLM context.",
-      "Refactored authentication from localStorage to HTTP-only JWT cookies with secure group+user ID validation to prevent XSS.",
-      "Implemented task queue using Celery for social media automation and Instagram scraping with Selenium.",
+      "Owned end-to-end design and implementation of an LLM-powered chatbot subsystem for a production AI marketing platform, as one of three student engineers with no senior engineering oversight, boosting social media metrics by 6%.",
+
+      "Designed a retrieval-augmented system using PostgreSQL hybrid full-text search and trigram similarity over game documentation and scraped competitor data, enabling faster and more accurate information retrieval for the chatbot.",
+
+      "Optimized CPU-only Qwen2.5:3B inference through Ollama, reducing latency from 5+ minutes to 3.5 minutes through model quantization; led migration to a hosted cloud LLM API that reduced end-to-end query latency to 5 seconds.",
+
+      "Built persistent chat history in PostgreSQL with JSONB storage and group-scoped authorization, allowing users to resume conversations and access past interactions across sessions.",
+
+      "Refactored authentication from localStorage to HTTP-only JWT cookies with multi-user authorization across 16+ REST API endpoints, mitigating CSRF and eliminating XSS-based token theft.",
+
+      "Containerized the full-stack application with Docker, wrote deployment scripts, and configured weekly schema/data backups to enable quick rollbacks and reduce downtime.",
+
       "Built a custom dashboard to allow users to play roulette on android devices using WebRTC and WebSockets through Unreal Engine.",
+
       "Developed a point to point pathfinding algorithm to draw lines on a map using Unreal Engine's NavMesh and A* algorithm.",
     ],
     links: [],
