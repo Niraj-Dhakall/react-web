@@ -1,13 +1,15 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { profile } from "@/data/portfolio";
 
 const links = [
-  { label: "experience", href: "#experience" },
-  { label: "projects", href: "#projects" },
-  { label: "skills", href: "#skills" },
-  { label: "contact", href: "#contact" },
+  { label: "experience", href: "/#experience" },
+  { label: "projects", href: "/#projects" },
+  { label: "research agent", href: "/projects/research-agent" },
+  { label: "skills", href: "/#skills" },
+  { label: "contact", href: "/#contact" },
 ];
 
 export function SiteNav() {
@@ -30,22 +32,22 @@ export function SiteNav() {
             : "border-transparent bg-transparent"
         }`}
       >
-        <a
-          href="#top"
+        <Link
+          href="/#top"
           className="font-mono text-sm font-medium tracking-tight text-fg transition-colors duration-200 hover:text-accent"
         >
           nirajd<span className="text-accent">.dev</span>
-        </a>
+        </Link>
 
         <div className="hidden items-center gap-6 md:flex">
           {links.map((l) => (
-            <a
+            <Link
               key={l.href}
               href={l.href}
               className="link-sweep font-mono text-xs tracking-wide text-mut transition-colors duration-200 hover:text-fg"
             >
               {l.label}
-            </a>
+            </Link>
           ))}
         </div>
 

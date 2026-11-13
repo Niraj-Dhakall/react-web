@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
 import { MediaGallery } from "@/components/MediaGallery";
 import { Reveal } from "@/components/Reveal";
@@ -55,7 +56,47 @@ export default function Home() {
             </SectionLabel>
           </Reveal>
 
-          <div className="mt-12 grid grid-cols-1 gap-8">
+          <Reveal>
+            <Link
+              href="/projects/research-agent"
+              className="group mt-12 block rounded-2xl border border-accent/40 bg-raised p-6 transition-colors duration-300 hover:border-accent sm:p-8"
+            >
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <span className="rounded-full border border-accent/40 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
+                  featured
+                </span>
+                <span className="inline-flex items-center gap-1.5 font-mono text-xs text-mut transition-colors group-hover:text-accent">
+                  full write-up
+                  <ArrowUpRight />
+                </span>
+              </div>
+              <h3 className="mt-4 text-2xl font-semibold tracking-tight text-fg">
+                Research Agent
+              </h3>
+              <p className="mt-3 max-w-2xl leading-relaxed text-mut">
+                A local retrieval-augmented research system with a first-class
+                evaluation harness: a planner, parallel workers and a
+                synthesizer that produce cited answers over dense, BM25 or
+                hybrid retrieval, measured on a hand-curated golden set with
+                LLM-as-judge.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs">
+                {[
+                  ["1.000", "recall@5"],
+                  ["1.000", "citation score"],
+                  ["0.875", "accuracy"],
+                  ["32", "unit tests"],
+                ].map(([v, l]) => (
+                  <span key={l} className="text-faint">
+                    <span className="mr-1.5 text-base text-fg">{v}</span>
+                    {l}
+                  </span>
+                ))}
+              </div>
+            </Link>
+          </Reveal>
+
+          <div className="mt-8 grid grid-cols-1 gap-8">
             {projects.map((project, i) => (
               <Reveal key={project.slug} delay={Math.min(i, 2) * 80}>
                 <ProjectCard project={project} />
