@@ -61,7 +61,7 @@ const chapters = [
   { id: "agents", label: "3 agents" },
   { id: "citations", label: "4 citations" },
   { id: "measure", label: "5 results" },
-  { id: "run", label: "6 run it" },
+  { id: "whats-next", label: "6 whats next" },
 ];
 
 export default function ResearchAgentPage() {
