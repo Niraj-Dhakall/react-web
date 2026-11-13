@@ -6,14 +6,14 @@ type El = { k: "heading" | "paragraph" | "code"; tag: string; text: string };
 
 /* Illustrative page — the cut rules are the real chunk_elements() rules. */
 const PAGE: El[] = [
-  { k: "heading", tag: "h2", text: "Regularization" },
-  { k: "paragraph", tag: "p", text: "Regularization adds a penalty on weight size to the training loss, trading a little bias for lower variance." },
-  { k: "paragraph", tag: "p", text: "The penalty strength λ is a hyperparameter, usually chosen by cross-validation." },
-  { k: "heading", tag: "h3", text: "L1 (Lasso)" },
-  { k: "paragraph", tag: "p", text: "Loss + λ·Σ|w|. Drives many weights to exactly 0 and performs automatic feature selection." },
+  { k: "heading", tag: "title", text: "Regularization" },
+  { k: "paragraph", tag: "text", text: "Regularization adds a penalty on weight size to the training loss, trading a little bias for lower variance." },
+  { k: "paragraph", tag: "text", text: "The penalty strength λ is a hyperparameter, usually chosen by cross-validation." },
+  { k: "heading", tag: "title", text: "L1 (Lasso)" },
+  { k: "paragraph", tag: "text", text: "Loss + λ·Σ|w|. Drives many weights to exactly 0 and performs automatic feature selection." },
   { k: "code", tag: "code", text: "loss = mse(y, y_hat) + lam * np.abs(w).sum()" },
-  { k: "heading", tag: "h3", text: "L2 (Ridge)" },
-  { k: "paragraph", tag: "p", text: "Loss + λ·Σw². Shrinks all weights smoothly; weights approach but rarely reach 0." },
+  { k: "heading", tag: "title", text: "L2 (Ridge)" },
+  { k: "paragraph", tag: "text", text: "Loss + λ·Σw². Shrinks all weights smoothly; weights approach but rarely reach 0." },
 ];
 
 type Group = { els: El[]; reason: string | null };
@@ -26,7 +26,7 @@ function group(els: El[]): Group[] {
       out.length === 0 ||
       el.k === "heading" ||
       (prev !== null && prev !== "heading" && (el.k === "code") !== (prev === "code"));
-    if (cut) out.push({ els: [], reason: prev === null ? null : el.k === "heading" ? "heading" : "prose ↔ code" });
+    if (cut) out.push({ els: [], reason: prev === null ? null : el.k === "heading" ? "new heading" : "text → code" });
     out[out.length - 1].els.push(el);
     prev = el.k;
   }
@@ -48,19 +48,19 @@ export function ChunkerDemo() {
   return (
     <div>
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h3 className="text-lg font-semibold text-fg">Watch the chunker cut</h3>
+        <h3 className="text-lg font-semibold text-fg">Watch a page get cut into chunks</h3>
         <button
           type="button"
           onClick={chunk}
           className="btn rounded-md border border-line px-3 py-1.5 font-mono text-xs text-mut hover:border-accent hover:text-accent"
         >
-          ✂ chunk it
+          ✂ cut it again
         </button>
       </div>
       <p className="mt-1.5 text-sm leading-relaxed text-mut">
-        Cuts happen at every heading and wherever prose turns into code. A
-        heading cut gets no overlap seed.{" "}
-        <span className="font-mono text-[11px] text-faint">illustrative page</span>
+        The cuts follow the page’s own structure: a new chunk starts at every
+        heading, and wherever text turns into code. Each blue bar is one chunk.{" "}
+        <span className="text-[12px] text-faint">(example page)</span>
       </p>
 
       <div key={run} className="mt-4 rounded-xl border border-line bg-well py-3 pl-3 pr-3">
@@ -113,11 +113,11 @@ export function ChunkerDemo() {
       <div className="mt-2.5 flex flex-wrap gap-x-4 gap-y-1 font-mono text-[11px] text-faint">
         <span className="inline-flex items-center gap-1.5">
           <span className="h-2.5 w-2.5 rounded-sm bg-s1" />
-          chunk
+          one chunk
         </span>
         <span className="inline-flex items-center gap-1.5">
           <span className="h-0 w-3 border-t-[1.5px] border-dashed border-bad" />
-          forced cut
+          cut
         </span>
       </div>
     </div>

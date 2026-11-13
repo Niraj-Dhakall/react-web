@@ -6,9 +6,9 @@ import { useState } from "react";
    WorkerAgent byNum lookup and SynthesizerAgent._renumber(). */
 
 const MAP_ROWS = [
-  { from: "chunk_num 2", to: "Chapter12.pdf::14", ok: true },
-  { from: "chunk_num 9", to: "not in byNum (1–8)", ok: false },
-  { from: 'chunk_num "two"', to: "int() fails", ok: false },
+  { from: "cites 2", to: "on the list, a real chunk", ok: true },
+  { from: "cites 9", to: "only 8 chunks were given", ok: false },
+  { from: 'cites "two"', to: "not a number", ok: false },
 ];
 
 export function ByNumDemo() {
@@ -26,19 +26,20 @@ export function ByNumDemo() {
     <div className="h-full rounded-2xl border border-line bg-raised p-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h3 className="text-lg font-semibold text-fg">
-          Worker: <code className="font-mono text-[0.85em]">byNum</code> lookup
+          Step 1: check every citation
         </h3>
         <button
           type="button"
           onClick={run}
           className="btn rounded-md border border-line px-3 py-1.5 font-mono text-xs text-mut hover:border-accent hover:text-accent"
         >
-          ▶ map citations
+          ▶ check them
         </button>
       </div>
       <p className="mt-1.5 text-sm leading-relaxed text-mut">
-        Eight chunks were in the prompt. The model’s JSON cites three numbers.{" "}
-        <span className="font-mono text-[11px] text-faint">illustrative</span>
+        The model was given 8 chunks, numbered 1 to 8. Its reply cites three
+        things. Only a number that is really on the list survives.{" "}
+        <span className="text-[12px] text-faint">(example)</span>
       </p>
       <pre className="mt-4 overflow-x-auto rounded-lg border border-line bg-well p-3 font-mono text-[11.5px] leading-relaxed text-mut">
         {`{"answer": "hf = K + E_B …",
@@ -60,13 +61,13 @@ export function ByNumDemo() {
             <span
               className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${r.ok ? "bg-ok/15 text-ok" : "bg-bad/15 text-bad"}`}
             >
-              {r.ok ? "Citation" : "dropped"}
+              {r.ok ? "kept" : "dropped"}
             </span>
           </div>
         ))}
       </div>
-      <p className="mt-3 font-mono text-[11px] text-faint">
-        → WorkerFinding keeps the answer · error = &quot;dropped 2 invalid citations&quot;
+      <p className="mt-3 text-[12px] text-faint">
+        The answer is kept. The 2 bad citations are removed and noted.
       </p>
     </div>
   );
@@ -117,19 +118,19 @@ export function RenumberDemo() {
     <div className="h-full rounded-2xl border border-line bg-raised p-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h3 className="text-lg font-semibold text-fg">
-          Synthesizer: <code className="font-mono text-[0.85em]">_renumber()</code>
+          Step 2: tidy the final answer
         </h3>
         <button
           type="button"
           onClick={() => setAfter((v) => !v)}
           className="btn rounded-md border border-line px-3 py-1.5 font-mono text-xs text-mut hover:border-accent hover:text-accent"
         >
-          {after ? "↺ show raw" : "▶ renumber"}
+          {after ? "↺ show before" : "▶ clean up"}
         </button>
       </div>
       <p className="mt-1.5 text-sm leading-relaxed text-mut">
-        Worker citations are merged into one source list. Markers outside it
-        are deleted; the rest are renumbered 1…m in first-use order.
+        When the workers’ answers are merged, any marker that points to
+        nothing is deleted, and the rest are renumbered in order.
       </p>
       <p className="mt-4 rounded-lg border border-line bg-well px-3.5 py-3 text-[15px] leading-loose text-fg">{parts}</p>
       <ul className="mt-3 grid gap-1 font-mono text-[11.5px]">
@@ -148,10 +149,10 @@ export function RenumberDemo() {
               </li>
             ))}
       </ul>
-      <p className="mt-3 font-mono text-[11px] text-faint">
+      <p className="mt-3 text-[12px] text-faint">
         {after
-          ? "[6] deleted (only 3 sources) · [3] → [2] · unused source dropped from the list"
-          : "raw synthesizer output, before _renumber() · illustrative"}
+          ? "[6] removed (there are only 3 sources) · [3] became [2] · the unused source is dropped"
+          : "the merged answer before clean-up · example"}
       </p>
     </div>
   );

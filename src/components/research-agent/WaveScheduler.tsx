@@ -58,11 +58,12 @@ export function WaveScheduler() {
       idx: i,
       label: (
         <>
-          <span className="font-mono text-[11px] text-faint">
-            {i}
-            {p.deps.length ? ` ← [${p.deps.join(",")}]` : ""}
-          </span>{" "}
-          {p.q}
+          <span className="font-mono text-[11px] text-faint">{i + 1}.</span> {p.q}
+          {p.deps.length > 0 && (
+            <span className="ml-1 whitespace-nowrap rounded bg-accent/15 px-1.5 py-0.5 text-[11px] text-accent">
+              needs {p.deps.map((d) => d + 1).join(" + ")}
+            </span>
+          )}
         </>
       ),
       span: s.out[i],
@@ -76,17 +77,18 @@ export function WaveScheduler() {
     <div>
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div className="max-w-xl">
-          <h3 className="text-lg font-semibold text-fg">One run, scheduled</h3>
+          <h3 className="text-lg font-semibold text-fg">Watch one question get answered</h3>
           <p className="mt-1.5 text-sm leading-relaxed text-mut">
-            A hypothetical four-part plan with one dependency. Sub-question
-            3 depends on 0 and 1, so it starts only after all of wave 1 finishes:{" "}
-            <code className="font-mono text-[12px] text-fg">asyncio.gather</code> waits for the whole wave.{" "}
-            <span className="font-mono text-[11px] text-faint">illustrative durations</span>
+            The planner split an example question into four parts. Parts 1 to 3
+            can be answered straight away, side by side. Part 4 needs the
+            answers to 1 and 2, so it waits for them. Change the number of
+            workers to see how the timing changes.{" "}
+            <span className="text-[12px] text-faint">(example timings)</span>
           </p>
         </div>
         <div>
-          <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-faint">--max-workers</p>
-          <div role="group" aria-label="max workers" className="mt-1.5 inline-flex gap-1 rounded-lg border border-line bg-well p-1">
+          <p className="text-[13px] text-mut">Workers at once</p>
+          <div role="group" aria-label="Workers at once" className="mt-1.5 inline-flex gap-1 rounded-lg border border-line bg-well p-1">
             {[1, 2, 3].map((v) => (
               <button
                 key={v}
@@ -153,12 +155,11 @@ export function WaveScheduler() {
           </span>
           <span className="inline-flex items-center gap-1.5">
             <span className="h-2.5 w-2.5 rounded-sm bg-s1/15 outline outline-1 outline-line" />
-            dependency wave
+            runs together
           </span>
         </div>
         <p className="font-mono text-xs text-mut">
-          end to end ≈ <span className="text-fg">{s.synth[1].toFixed(1)}s</span> · wave 1 ends at{" "}
-          {s.waves[0].span[1].toFixed(1)}s
+          total time ≈ <span className="text-fg">{s.synth[1].toFixed(1)}s</span>
         </p>
       </div>
     </div>

@@ -189,6 +189,35 @@ body {
     }
   }
 
+  /* Pipeline walkthrough — content arriving step by step */
+  .fade-in {
+    animation: fade-in 420ms var(--ease-out-strong) both;
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+  }
+  .progress-fill {
+    transform: scaleX(0);
+    animation: progress-fill linear forwards;
+  }
+  @keyframes progress-fill {
+    to {
+      transform: scaleX(1);
+    }
+  }
+  .thinking {
+    display: inline-block;
+    animation: thinking 1s ease-in-out infinite;
+  }
+  @keyframes thinking {
+    50% {
+      opacity: 0.2;
+    }
+  }
+
   /* Availability signal */
   .pulse-dot {
     position: relative;
@@ -277,6 +306,19 @@ body {
     opacity: 0;
   }
   .hl-sweep {
+    animation: none;
+  }
+  /* walkthrough still plays — fades only, no movement */
+  .fade-in {
+    animation-name: fade-in-still;
+    animation-duration: 200ms;
+  }
+  @keyframes fade-in-still {
+    from {
+      opacity: 0;
+    }
+  }
+  .thinking {
     animation: none;
   }
   .lightbox[open] {

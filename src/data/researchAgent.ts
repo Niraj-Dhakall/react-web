@@ -275,14 +275,14 @@ export const roadmap: { n: number; t: string; d: string; s: "done" | "planned" }
 
 /* ---------------- run it ---------------- */
 
-export const commands = [
-  { cap: "Ask a question (multi-agent by default)", cmd: 'research-agent research "Compare L1 and L2 regularization"' },
-  { cap: "One worker, no planner or synthesizer", cmd: "research-agent research \"What is Einstein's photoelectric equation?\" --single" },
-  { cap: "Ingest a Markdown document", cmd: "research-agent ingest guides/implementation-plan.md --format markdown --doc-id implementation-plan" },
-  { cap: "Cheap retrieval sweep (no chat calls)", cmd: "python -m research_system.eval.runner --retrieval-only" },
-  { cap: "Full judged eval, either pipeline", cmd: "python -m research_system.eval.runner --pipeline multi" },
-  { cap: "Unit tests (offline)", cmd: 'python -m pytest research_system/tests/unit -o addopts="" -q' },
-];
+// export const commands = [
+//   { cap: "Ask a question (multi-agent by default)", cmd: 'research-agent research "Compare L1 and L2 regularization"' },
+//   { cap: "One worker, no planner or synthesizer", cmd: "research-agent research \"What is Einstein's photoelectric equation?\" --single" },
+//   { cap: "Ingest a Markdown document", cmd: "research-agent ingest guides/implementation-plan.md --format markdown --doc-id implementation-plan" },
+//   { cap: "Cheap retrieval sweep (no chat calls)", cmd: "python -m research_system.eval.runner --retrieval-only" },
+//   { cap: "Full judged eval, either pipeline", cmd: "python -m research_system.eval.runner --pipeline multi" },
+//   { cap: "Unit tests (offline)", cmd: 'python -m pytest research_system/tests/unit -o addopts="" -q' },
+// ];
 
 export const stack = [
   "Python 3.11+",
